@@ -19,6 +19,7 @@
     --tooltip-text: #121212;
     --toggle-bg: #2a2a2a;
     --toggle-border: #444;
+    --box-border: #333;
   }
   body.light {
     --bg: #fafafa;
@@ -31,38 +32,117 @@
     --tooltip-text: #f5f5f5;
     --toggle-bg: #eaeaea;
     --toggle-border: #ccc;
+    --box-border: #ddd;
   }
   * {
     box-sizing: border-box;
   }
+  html, body {
+    height: 100%;
+  }
   body {
     font-family: 'Inter', Arial, sans-serif;
-    text-align: center;
-    padding: 50px 20px;
     background: var(--bg);
     color: var(--text);
     transition: background 0.2s ease, color 0.2s ease;
     min-height: 100vh;
     margin: 0;
     text-transform: lowercase;
+    display: flex;
   }
+
+  /* LEFT: image container */
+  .image-half {
+    width: 40%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .image-half img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0.85; /* transparency effect */
+  }
+
+  /* RIGHT: text container */
+  .text-half {
+    width: 60%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 7%; /* 5-10% padding on all sides */
+  }
+  .text-box {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 20px;
+    border: 2px solid #000;
+    border-radius: 12px;
+    background: var(--toggle-bg);
+    padding: 30px;
+    position: relative;
+  }
+
+  /* Prettier scrollbar */
+  .text-box::-webkit-scrollbar {
+    width: 10px;
+  }
+  .text-box::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 12px 0;
+  }
+  .text-box::-webkit-scrollbar-thumb {
+    background: var(--toggle-border);
+    border-radius: 10px;
+    border: 2px solid var(--toggle-bg);
+  }
+  .text-box::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+  }
+  .text-box {
+    scrollbar-width: thin;
+    scrollbar-color: var(--toggle-border) transparent;
+  }
+
   img.profile {
     width: 130px;
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+  .content-inner {
+    width: 100%;
+    padding-right: 160px; /* clears the top-right profile icon */
   }
   h1 {
     font-family: 'Poppins', Georgia, serif;
     font-style: italic;
     font-weight: 500;
     letter-spacing: 0.5px;
+    margin: 0;
   }
   .columns {
     display: flex;
-    justify-content: center;
-    gap: 50px;
+    justify-content: flex-start;
+    gap: 40px;
     text-align: left;
+    flex-wrap: wrap;
+    width: 100%;
   }
   h2 {
     font-family: 'Poppins', Arial, sans-serif;
@@ -139,31 +219,64 @@
     font-size: 13px;
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
+    z-index: 10;
+  }
+
+  /* Responsive: stack on small screens */
+  @media (max-width: 800px) {
+    body {
+      flex-direction: column;
+    }
+    .image-half, .text-half {
+      width: 100%;
+      height: 50vh;
+    }
+    .image-half {
+      order: 1;
+    }
+    .text-half {
+      order: 2;
+    }
+    .text-half {
+      padding: 8% 6%;
+    }
   }
 </style>
 </head>
 <body>
-  <button class="mode-toggle" id="modeToggle" onclick="toggleMode()">☀ light mode</button>
-  <img class="profile" src="https://placehold.co/260x260/ffffff/000000?text=icon" alt="profile icon">
-  <h1>walksite</h1>
-  <div class="columns">
-    <div>
-      <h2>links</h2>
-      <ul>
-        <li><img class="link-icon" src="https://minerva-archive.org/assets/favicon.svg" alt=""><span class="tooltip"><a href="https://minerva-archive.org/">MiNERVA Archive</a><span class="tooltip-text">an online archive/reference site.</span></span></li>
-        <li><img class="link-icon" src="https://annas-archive.gl/apple-touch-icon.png?hash=d2fa3410fb1ae23ef0ab" alt=""><span class="tooltip"><a href="https://annas-archive.gl/">anna's archive</a><span class="tooltip-text">a shadow library search engine for books, papers, and more.</span></span></li>
-        -->
-      </ul>
-    </div>
-    <div>
-      <h2></h2>
-      <ul>
-      </ul>
-    </div>
-    <div>
-      <h2></h2>
-      <ul>
-      </ul>
+  <button class="mode-toggle" id="modeToggle" onclick="toggleMode()">☀️</button>
+
+  <!-- LEFT HALF: put your image here -->
+  <div class="image-half">
+    <img src="https://wimg.rule34.xxx//images/1207/75d0463fab0b55ddd9c30d5d32b27f53.png?18414992" alt="">
+  </div>
+
+  <!-- RIGHT HALF: all text content, boxed with padding -->
+  <div class="text-half">
+    <div class="text-box">
+      <img class="profile" src="https://static.wikia.nocookie.net/deltarune/images/e/e6/Site-logo.png/revision/latest?cb=20251118175941" alt="profile icon">
+      <div class="content-inner">
+        <h1>walksite</h1>
+        <div class="columns">
+          <div>
+            <h2>links</h2>
+            <ul>
+              <li><img class="link-icon" src="https://minerva-archive.org/assets/favicon.svg" alt=""><span class="tooltip"><a href="https://minerva-archive.org/">MiNERVA Archive</a><span class="tooltip-text">an online archive/reference site.</span></span></li>
+              <li><img class="link-icon" src="https://annas-archive.gl/apple-touch-icon.png?hash=d2fa3410fb1ae23ef0ab" alt=""><span class="tooltip"><a href="https://annas-archive.gl/">anna's archive</a><span class="tooltip-text">a shadow library search engine for books, papers, and more.</span></span></li>
+            </ul>
+          </div>
+          <div>
+            <h2></h2>
+            <ul>
+            </ul>
+          </div>
+          <div>
+            <h2></h2>
+            <ul>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
