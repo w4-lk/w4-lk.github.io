@@ -4,81 +4,177 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>w4-lk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #121212;
+    --text: #e8e8e8;
+    --muted: #9a9a9a;
+    --header-line: #3a3a3a;
+    --link: #8ab4f8;
+    --link-underline: rgba(138, 180, 248, 0.35);
+    --tooltip-bg: #f5f5f5;
+    --tooltip-text: #121212;
+    --toggle-bg: #2a2a2a;
+    --toggle-border: #444;
+  }
+  body.light {
+    --bg: #fafafa;
+    --text: #1c1c1c;
+    --muted: #666666;
+    --header-line: #d8d8d8;
+    --link: #3462c9;
+    --link-underline: rgba(52, 98, 201, 0.3);
+    --tooltip-bg: #1c1c1c;
+    --tooltip-text: #f5f5f5;
+    --toggle-bg: #eaeaea;
+    --toggle-border: #ccc;
+  }
+  * {
+    box-sizing: border-box;
+  }
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     text-align: center;
     padding: 50px 20px;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.2s ease, color 0.2s ease;
+    min-height: 100vh;
+    margin: 0;
+    text-transform: lowercase;
   }
-
-  img {
+  img.profile {
     width: 130px;
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
   }
-
   h1 {
-    font-family: Georgia, serif;
+    font-family: 'Poppins', Georgia, serif;
     font-style: italic;
-    font-weight: normal;
+    font-weight: 500;
+    letter-spacing: 0.5px;
   }
-
   .columns {
     display: flex;
     justify-content: center;
     gap: 50px;
     text-align: left;
   }
-
   h2 {
-    border-bottom: 2px solid black;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 600;
+    border-bottom: 2px solid var(--header-line);
     display: inline-block;
-    font-size: 18px;
+    font-size: 17px;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
   }
-
   ul {
     list-style: none;
     padding: 0;
+    margin-top: 4px;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0;
+  }
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-color: var(--link-underline);
+    text-underline-offset: 2px;
+  }
+  a:hover {
+    text-decoration-color: var(--link);
+  }
+  .link-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+    border: none;
+    flex-shrink: 0;
+  }
+  .tooltip {
+    position: relative;
+    cursor: pointer;
+  }
+  .tooltip .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    text-align: left;
+    padding: 8px 10px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 0;
+    width: 200px;
+    font-size: 12px;
+    line-height: 1.4;
+    font-family: 'Inter', Arial, sans-serif;
+    transition: opacity 0.15s ease-in-out;
+  }
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  .mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--toggle-border);
+    color: var(--text);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 </style>
 </head>
 <body>
-
-  <img src="https://placehold.co/260x260/ffffff/000000?text=icon" alt="profile icon">
-
+  <button class="mode-toggle" id="modeToggle" onclick="toggleMode()">☀ light mode</button>
+  <img class="profile" src="https://placehold.co/260x260/ffffff/000000?text=icon" alt="profile icon">
   <h1>walksite</h1>
-
   <div class="columns">
-
     <div>
       <h2>links</h2>
       <ul>
-        <li><a href="#">site 1</a></li>
-        <li><a href="#">site 2</a></li>
-        <li><a href="#">site 3</a></li>
+        <li><img class="link-icon" src="https://minerva-archive.org/assets/favicon.svg" alt=""><span class="tooltip"><a href="https://minerva-archive.org/">MiNERVA Archive</a><span class="tooltip-text">an online archive/reference site.</span></span></li>
+        <li><img class="link-icon" src="https://annas-archive.gl/apple-touch-icon.png?hash=d2fa3410fb1ae23ef0ab" alt=""><span class="tooltip"><a href="https://annas-archive.gl/">anna's archive</a><span class="tooltip-text">a shadow library search engine for books, papers, and more.</span></span></li>
+        -->
       </ul>
     </div>
-
     <div>
-      <h2>tools</h2>
+      <h2></h2>
       <ul>
-        <li><a href="#">site 1</a></li>
-        <li><a href="#">site 2</a></li>
-        <li><a href="#">site 3</a></li>
       </ul>
     </div>
-
     <div>
-      <h2>stuff</h2>
+      <h2></h2>
       <ul>
-        <li><a href="#">site 1</a></li>
-        <li><a href="#">site 2</a></li>
-        <li><a href="#">site 3</a></li>
       </ul>
     </div>
-
   </div>
 
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      const btn = document.getElementById('modeToggle');
+      body.classList.toggle('light');
+      const isLight = body.classList.contains('light');
+      btn.textContent = isLight ? '🌙' : '☀️';
+    }
+  </script>
 </body>
 </html>
