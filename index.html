@@ -66,6 +66,23 @@
     object-fit: contain;
     opacity: 0.85; /* transparency effect */
   }
+  .art-credit {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Inter', Arial, sans-serif;
+  }
+  .art-credit a {
+    color: var(--muted);
+    text-decoration: underline;
+    text-decoration-color: var(--link-underline);
+  }
+  .art-credit a:hover {
+    color: var(--link);
+    text-decoration-color: var(--link);
+  }
 
   /* RIGHT: text container */
   .text-half {
@@ -248,13 +265,14 @@
 
   <!-- LEFT HALF: put your image here -->
   <div class="image-half">
-    <img src="https://wimg.rule34.xxx//images/1207/75d0463fab0b55ddd9c30d5d32b27f53.png?18414992" alt="">
+    <!-- <img src="YOUR_IMAGE_URL_HERE" alt=""> -->
+    <span class="art-credit">art by <a href="https://wimg.rule34.xxx//images/1207/75d0463fab0b55ddd9c30d5d32b27f53.png?18414992" target="_blank" rel="noopener">@god1annie</a></span>
   </div>
 
   <!-- RIGHT HALF: all text content, boxed with padding -->
   <div class="text-half">
     <div class="text-box">
-      <img class="profile" src="https://static.wikia.nocookie.net/deltarune/images/e/e6/Site-logo.png/revision/latest?cb=20251118175941" alt="profile icon">
+      <img class="profile" src="https://deltarune.wiki/images/Deltarune_Wiki_logo.png?cb=1h7w3z&h=thumb.php&f=Deltarune_Wiki_logo.png" alt="profile icon">
       <div class="content-inner">
         <h1>walksite</h1>
         <div class="columns">
